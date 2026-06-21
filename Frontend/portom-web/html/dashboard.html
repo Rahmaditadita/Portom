@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Portal Transportasi</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav id="navbar">
+        <span class="nav-brand">🚌 Portal Transportasi</span>
+        <div class="nav-links">
+            <button onclick="window.location.href='dashboard.html'" id="nav-dashboard" class="active">Dashboard</button>
+            <button onclick="window.location.href='vehicle.html'" id="nav-kendaraan">Kendaraan</button>
+            <button onclick="window.location.href='pangkalan.html'" id="nav-pangkalan">Pangkalan</button>
+        </div>
+    </nav>
+
+    <div class="page active" id="page-dashboard"> 
+      <div class="main-content">
+        <div class="page-title" id="dash-greeting">Selamat datang</div>
+        <div class="page-sub">Ringkasan data sistem transportasi hari ini</div>
+        
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-label">Total Kendaraan</div>
+            <div class="stat-value" id="stat-kendaraan">–</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Pangkalan</div>
+            <div class="stat-value" id="stat-pangkalan">–</div>
+          </div>
+        </div>
+        
+        <div class="section-title">Daftar Pangkalan</div>
+        <!-- Wadah tempat daftar pangkalan hasil Axios disuntikkan oleh JavaScript -->
+        <div class="pangkalan-list" id="dash-pangkalan-list">
+          <div class="loading">Memuat data…</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

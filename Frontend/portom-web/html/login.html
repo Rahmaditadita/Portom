@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Portal Transportasi</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="page active" id="page-login">
+      <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#31472c 0%,#40916c 100%)">
+        <div class="login-card">
+          <div class="login-logo">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18L20 8.5v7L12 19.82 4 15.5v-7L12 4.18z"/></svg>
+          </div>
+          <h1>Selamat datang</h1>
+          <p>Masuk ke sistem manajemen transportasi</p>
+          <div class="error-msg" id="login-error" style="display: none;">Email atau password salah.</div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email"
+                id="inp-email"
+                placeholder="contoh@email.com"/>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    id="inp-pass"
+                    placeholder="••••••••">
+
+                <span
+                    class="toggle-password"
+                    onclick="togglePassword()">
+                    👁
+                </span>
+            </div>
+          </div>
+          <!-- Ditambahkan id="btn-login" dan memanggil doLogin() sesuai kode kamu -->
+          <button class="btn-primary" id="btn-login" onclick="doLogin()">Masuk</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+</html>

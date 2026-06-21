@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangkalan - Portal Transportasi</title>
+    <!-- Menghubungkan ke file css eksternal milikmu -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- 1. NAVBAR DI BAGIAN ATAS -->
+    <nav id="navbar">
+        <span class="nav-brand">🚌 Portal Transportasi</span>
+        <div class="nav-links">
+            <button onclick="window.location.href='dashboard.html'" id="nav-dashboard">Dashboard</button>
+            <button onclick="window.location.href='vehicle.html'" id="nav-kendaraan">Kendaraan</button>
+            <button onclick="window.location.href='pangkalan.html'" id="nav-pangkalan" class="active">Pangkalan</button>
+        </div>
+    </nav>
+
+    <!-- 2. KONTEN UTAMA MANAJEMEN PANGKALAN (POIN 3) -->
+    <div class="page active" id="page-pangkalan">
+      <div class="main-content">
+        <div class="page-title">Pangkalan Transportasi Umum</div>
+        <div class="page-sub">Integrasi titik mangkal angkot, bajaj, dan becak secara real-time</div>
+     
+        <!-- Form disembunyikan/diubah menjadi info edukatif karena data pangkalan ditarik dari service pusat luar -->
+        <div class="form-card">
+          <h2>Pencarian Pangkalan Terintegrasi</h2>
+          <p style="font-size: 14px; color: #555; margin-bottom: 12px;">
+             Sistem PORTOM secara otomatis mensinkronkan data pangkalan aktif dari <strong>Pangkalan Service (Port 8080)</strong> untuk memudahkan warga menemukan moda transportasi umum terdekat.
+          </p>
+        </div>
+     
+        <div class="section-card">
+          <div class="section-card-header">
+            <h3>Data Pangkalan Terdeteksi</h3>
+            <!-- Badge ini akan diupdate jumlahnya otomatis oleh JS -->
+            <span class="badge" id="badge-pangkalan">0 pangkalan</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nama Pangkalan</th>
+                <th>Jenis Angkutan</th>
+                <th>Kapasitas Slot</th>
+                <th>Wilayah Operasional</th>
+                <th>Aksi Peta</th>
+              </tr>
+            </thead>
+            <!-- Tempat data hasil tembakan fetch disuntikkan -->
+            <tbody id="tbody-pangkalan">
+              <tr><td colspan="6" class="empty">Menghubungkan ke Pangkalan Service...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+     
+    <div class="toast" id="toast"></div>
+
+    <!-- Menghubungkan ke file JS pasangannya -->
+    <script src="../js/pangkalan.js"></script>
+</body>
+</html>

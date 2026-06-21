@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendaraan - Portal Transportasi</title>
+    <!-- Menghubungkan ke file css eksternal milikmu -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <nav id="navbar">
+        <span class="nav-brand">🚌 Portal Transportasi</span>
+        <div class="nav-links">
+            <button onclick="window.location.href='dashboard.html'" id="nav-dashboard">Dashboard</button>
+            <button onclick="window.location.href='vehicle.html'" id="nav-kendaraan" class="active">Kendaraan</button>
+            <button onclick="window.location.href='pangkalan.html'" id="nav-pangkalan">Pangkalan</button>
+        </div>
+    </nav>
+
+    <div class="page active" id="page-kendaraan"> <!-- Ditambah class active agar konten langsung muncul -->
+      <div class="main-content">
+        <div class="page-title">Kendaraan</div>
+        <div class="page-sub">Tambah dan kelola data kendaraan</div>
+     
+        <div class="form-card">
+          <h2>Tambah Kendaraan</h2>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Nama Pemilik</label>
+              <input type="text" id="v-nama" placeholder="Budi Santoso"/>
+            </div>
+
+            <div class="form-group">
+            <label>Jenis Kendaraan</label>
+            <select id="v-jenis">
+                <option value="">Pilih jenis…</option>
+                <!-- Jenis Kendaraan Pribadi Warga -->
+                <option value="Motor">Motor Pribadi</option>
+                <option value="Mobil (Sedan/Hatchback)">Mobil (Sedan / Hatchback)</option>
+                <option value="Mobil (SUV/MPV/Minivan)">Mobil Keluarga (SUV / MPV)</option>
+                <option value="Sepeda Listrik">Sepeda Listrik / Selis</option>
+            </select>
+            </div>
+
+            <div class="form-group">
+              <label>Wilayah</label>
+              <input type="text" id="v-wilayah" placeholder="Jember Kota"/>
+            </div>
+          </div>
+          <button class="btn-save" onclick="tambahKendaraan()">Simpan</button>
+        </div>
+     
+        <div class="section-card">
+          <div class="section-card-header">
+            <h3>Data Kendaraan</h3>
+            <span class="badge" id="badge-kendaraan">0 data</span>
+          </div>
+
+                <div style="padding: 20px 20px 0 20px;">
+          <div id="slot-alarm"></div>
+          <div class="section-title">Visualisasi Parking Lot Digital KK Anda</div>
+          <div id="parking-lot" class="parking-lot-container"></div>
+      </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nama Pemilik</th>
+                <th>Jenis</th>
+                <th>Wilayah</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-kendaraan">
+              <tr><td colspan="5" class="empty">Belum ada data</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="../js/vehicle.js"></script>
+</body>
+</html>
