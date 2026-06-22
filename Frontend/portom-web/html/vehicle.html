@@ -10,7 +10,7 @@
 <body>
 
     <nav id="navbar">
-        <span class="nav-brand">🚌 Portal Transportasi</span>
+        <span class="nav-brand">🚌 PORTOM</span>
         <div class="nav-links">
             <button onclick="window.location.href='dashboard.html'" id="nav-dashboard">Dashboard</button>
             <button onclick="window.location.href='vehicle.html'" id="nav-kendaraan" class="active">Kendaraan</button>
@@ -18,11 +18,12 @@
         </div>
     </nav>
 
-    <div class="page active" id="page-kendaraan"> <!-- Ditambah class active agar konten langsung muncul -->
+    <div class="page active" id="page-kendaraan">
       <div class="main-content">
         <div class="page-title">Kendaraan</div>
         <div class="page-sub">Tambah dan kelola data kendaraan</div>
      
+        <!-- FORM TAMBAH (CREATE) -->
         <div class="form-card">
           <h2>Tambah Kendaraan</h2>
           <div class="form-row-3">
@@ -35,7 +36,6 @@
             <label>Jenis Kendaraan</label>
             <select id="v-jenis">
                 <option value="">Pilih jenis…</option>
-                <!-- Jenis Kendaraan Pribadi Warga -->
                 <option value="Motor">Motor Pribadi</option>
                 <option value="Mobil (Sedan/Hatchback)">Mobil (Sedan / Hatchback)</option>
                 <option value="Mobil (SUV/MPV/Minivan)">Mobil Keluarga (SUV / MPV)</option>
@@ -57,12 +57,13 @@
             <span class="badge" id="badge-kendaraan">0 data</span>
           </div>
 
-                <div style="padding: 20px 20px 0 20px;">
-          <div id="slot-alarm"></div>
-          <div class="section-title">Visualisasi Parking Lot Digital KK Anda</div>
-          <div id="parking-lot" class="parking-lot-container"></div>
-      </div>
+          <div style="padding: 20px 20px 0 20px;">
+              <div id="slot-alarm"></div>
+              <div class="section-title">Visualisasi Parking Lot Digital KK Anda</div>
+              <div id="parking-lot" class="parking-lot-container"></div>
+          </div>
 
+          <!-- TABEL DATA (READ) -->
           <table>
             <thead>
               <tr>
@@ -70,7 +71,7 @@
                 <th>Nama Pemilik</th>
                 <th>Jenis</th>
                 <th>Wilayah</th>
-                <th></th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody id="tbody-kendaraan">
@@ -80,6 +81,40 @@
         </div>
       </div>
     </div>
+
+    <!-- MODAL POP-UP EDIT (HIDDEN BY DEFAULT) -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Data Kendaraan</h2>
+            <input type="hidden" id="edit-v-id">
+            
+            <div class="form-group-modal">
+                <label>Nama Pemilik</label>
+                <input type="text" id="edit-v-nama">
+            </div>
+            
+            <div class="form-group-modal">
+                <label>Jenis Kendaraan</label>
+                <select id="edit-v-jenis">
+                    <option value="Motor">Motor Pribadi</option>
+                    <option value="Mobil (Sedan/Hatchback)">Mobil (Sedan / Hatchback)</option>
+                    <option value="Mobil (SUV/MPV/Minivan)">Mobil Keluarga (SUV / MPV)</option>
+                    <option value="Sepeda Listrik">Sepeda Listrik / Selis</option>
+                </select>
+            </div>
+            
+            <div class="form-group-modal">
+                <label>Wilayah</label>
+                <input type="text" id="edit-v-wilayah">
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="tutupModalEdit()">Batal</button>
+                <button class="btn-save-modal" onclick="simpanPerubahanKendaraan()">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/vehicle.js"></script>
 </body>
 </html>

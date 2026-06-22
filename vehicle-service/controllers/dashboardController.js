@@ -11,7 +11,7 @@ exports.getDashboard = async (req, res) => {
 
     return res.json({
       message: "Dashboard Vehicle Service",
-      totalVehicle: totalVehicle, // Angka otomatis mengikuti jumlah baris di DB
+      totalVehicle: totalVehicle, 
       pangkalan: pangkalanResponse.data
     });
 

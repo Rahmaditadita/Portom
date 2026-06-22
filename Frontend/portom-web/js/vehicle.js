@@ -4,6 +4,20 @@ window.onload = () => {
     loadKendaraan();
 };
 
+// Fungsi untuk membuka modal edit dan mengisi otomatis data lama ke inputan
+function bukaModalEdit(id, nama, jenis, wilayah) {
+    document.getElementById('editModal').style.display = 'block';
+    document.getElementById('edit-v-id').value = id;
+    document.getElementById('edit-v-nama').value = nama;
+    document.getElementById('edit-v-jenis').value = jenis;
+    document.getElementById('edit-v-wilayah').value = wilayah;
+}
+
+// Fungsi untuk menutup modal
+function tutupModalEdit() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
 async function loadKendaraan() {
     try {
         const response = await fetch(API_URL);
@@ -16,14 +30,12 @@ async function loadKendaraan() {
 
         badge.textContent = `${data.length} data`;
 
-        // ════════ LOGIKA VISUALISASI PARKING LOT DIGITAL (POIN 2) ════════
+        // ════════ LOGIKA VISUALISASI PARKING LOT DIGITAL ════════
         parkingLot.innerHTML = ""; 
         alarmBox.innerHTML = "";   
 
-        // Aturan simulasi: 1 KK Idealnya hanya boleh punya 1 kendaraan pribadi
         const MAX_SLOT_GRATIS = 1; 
 
-        // Atur Slot 1
         if (data.length >= 1) {
             parkingLot.innerHTML += `
                 <div class="slot-card filled">
@@ -42,9 +54,7 @@ async function loadKendaraan() {
             `;
         }
 
-        // Atur Slot 2 dan Seterusnya (Jika Warga Nekat Menambah Kendaraan)
         if (data.length > MAX_SLOT_GRATIS) {
-            // Picu Alarm Box Peringatan Pajak Progresif
             alarmBox.innerHTML = `
                 <div class="alarm-box">
                     ⚠️ ALARM SISTEM: KK Anda terdeteksi melebihi kuota lahan parkir resmi (Maks ${MAX_SLOT_GRATIS} Kendaraan). 
@@ -52,7 +62,6 @@ async function loadKendaraan() {
                 </div>
             `;
 
-            // Cetak sisa kendaraan dalam keadaan TERKUNCI MERAH
             for (let i = 1; i < data.length; i++) {
                 parkingLot.innerHTML += `
                     <div class="slot-card locked">
@@ -63,7 +72,6 @@ async function loadKendaraan() {
                 `;
             }
         } else {
-            // Jika kendaraan masih 1 atau kosong, slot 2 tampil sebagai himbauan edukatif
             parkingLot.innerHTML += `
                 <div class="slot-card" style="border-color: #ccc; color: #999;">
                     <div class="slot-icon">🚌</div>
@@ -81,6 +89,7 @@ async function loadKendaraan() {
 
         tbody.innerHTML = "";
         data.forEach((item, index) => {
+            // DI SINI SAYA SUDAH MENYISIPKAN TOMBOL EDIT DI SAMPING HAPUS
             tbody.innerHTML += `
                 <tr>
                     <td>${index + 1}</td>
@@ -88,7 +97,8 @@ async function loadKendaraan() {
                     <td>${item.jenisKendaraan}</td>
                     <td>${item.wilayah}</td>
                     <td>
-                        <button class="btn-delete" onclick="hapusKendaraan(${item.id})">Hapus</button>
+                        <button class="btn-edit" onclick="bukaModalEdit('${item.id}', '${item.namaPemilik}', '${item.jenisKendaraan}', '${item.wilayah}')">Edit</button>
+                        <button class="btn-delete" onclick="hapusKendaraan('${item.id}')">Hapus</button>
                     </td>
                 </tr>
             `;
@@ -124,6 +134,34 @@ async function tambahKendaraan() {
         }
     } catch (error) {
         console.error(error);
+    }
+}
+
+// Fungsi Simpan Perubahan yang disesuaikan dengan skema nama API backend Anda (API_URL)
+async function simpanPerubahanKendaraan() {
+    const id = document.getElementById('edit-v-id').value;
+    const namaPemilik = document.getElementById('edit-v-nama').value;
+    const jenisKendaraan = document.getElementById('edit-v-jenis').value;
+    const wilayah = document.getElementById('edit-v-wilayah').value;
+
+    try {
+        // Menggunakan API_URL yang sama (port 3002) dan struktur kolom database Anda
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ namaPemilik, jenisKendaraan, wilayah })
+        });
+        
+        if (response.ok) {
+            alert('Data kendaraan berhasil diperbarui!');
+            tutupModalEdit();
+            loadKendaraan(); // Memuat ulang data tabel tanpa harus reload penuh
+        } else {
+            alert('Gagal memperbarui data.');
+        }
+    } catch (error) {
+        console.error('Error saat update data:', error);
+        alert('Terjadi kesalahan koneksi ke server.');
     }
 }
 
